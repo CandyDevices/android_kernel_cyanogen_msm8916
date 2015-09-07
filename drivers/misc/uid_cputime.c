@@ -89,6 +89,7 @@ static int uid_stat_show(struct seq_file *m, void *v)
 	for_each_process(task) {
 		uid_entry = find_or_register_uid(from_kuid_munged(
 			current_user_ns(), task_uid(task)));
+		uid_entry = find_or_register_uid(task_uid(task));
 		if (!uid_entry) {
 			read_unlock(&tasklist_lock);
 			mutex_unlock(&uid_lock);
